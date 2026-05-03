@@ -387,7 +387,7 @@
     <p class="text-gray-400 mb-8">Have a question? Send us a message and we'll get back to you shortly.</p>
 
     <form id="contactForm" class="space-y-5">
-      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+      <input type="hidden" name="access_key" value="" />
       <input type="hidden" name="subject" value="New Contact Message – RIVASILL Website" />
       <input type="hidden" name="from_name" value="RIVASILL Website" />
       <input type="checkbox" name="botcheck" style="display:none" />
@@ -442,7 +442,7 @@
     <p class="text-gray-400 mb-8">Fill the form and we'll get back to you within 24 hours.</p>
 
     <form id="queryForm" class="space-y-6">
-      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+      <input type="hidden" name="access_key" value="" />
       <input type="hidden" name="subject" value="New Bulk Order Query – RIVASILL Website" />
       <input type="hidden" name="from_name" value="RIVASILL Website" />
       <input type="checkbox" name="botcheck" style="display:none" />
@@ -528,6 +528,13 @@
 
 <!-- ═══════════════════════════ SCRIPT ═══════════════════════════ -->
 <script>
+  // ── ✏️  PASTE YOUR WEB3FORMS KEY HERE (only one place!) ──────
+  const WEB3FORMS_KEY = '8d699de3-7962-4a33-ace0-764a26832d76';
+  // ─────────────────────────────────────────────────────────────
+
+  // Inject key into all forms automatically
+  document.querySelectorAll('input[name="access_key"]').forEach(el => el.value = WEB3FORMS_KEY);
+
   function openModal(id)  { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
   function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
   function closeOnBackdrop(e, id) { if (e.target === document.getElementById(id)) closeModal(id); }
@@ -542,10 +549,7 @@
 
   document.getElementById('queryForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    const key = this.querySelector('[name="access_key"]').value;
-    if (!key || key === 'YOUR_ACCESS_KEY_HERE') {
-      showToast('⚠️ Please set your Web3Forms access key (see README).', 'error'); return;
-    }
+
     const btn = document.getElementById('submitBtn');
     const txt = document.getElementById('submitText');
     const spn = document.getElementById('submitSpinner');
@@ -568,10 +572,7 @@
 
   document.getElementById('contactForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    const key = this.querySelector('[name="access_key"]').value;
-    if (!key || key === 'YOUR_ACCESS_KEY_HERE') {
-      showToast('⚠️ Please set your Web3Forms access key (see README).', 'error'); return;
-    }
+
     const btn = document.getElementById('contactSubmitBtn');
     const txt = document.getElementById('contactSubmitText');
     const spn = document.getElementById('contactSpinner');
