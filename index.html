@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RIVASILL – Premium Silicone Sealant | Rivanta Enterprises</title>
+  <meta name="description" content="RIVASILL – Premium silicone sealants for construction and industrial applications. Waterproof, UV resistant, professional grade." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    * { font-family: 'Inter', sans-serif; }
+
+    html { scroll-behavior: smooth; }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.4; }
+    }
+    .blob { animation: pulse-glow 4s ease-in-out infinite; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeInUp 0.7s ease forwards; }
+
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .shimmer-text {
+      background: linear-gradient(90deg, #fff 0%, #60a5fa 40%, #1d4ed8 60%, #fff 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      border-radius: 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.success { background: #16a34a; color: white; }
+    .toast.error { background: #dc2626; color: white; }
+
+    input, textarea {
+      color: white;
+      background: #111827;
+    }
+    input::placeholder, textarea::placeholder { color: #6b7280; }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #3b82f6 !important;
+      box-shadow: 0 0 0 2px rgba(59,130,246,0.3);
+    }
+
+    .product-card:hover { transform: translateY(-8px); }
+    .product-card { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+    .product-card:hover { box-shadow: 0 30px 60px -10px rgba(59,130,246,0.15); }
+  </style>
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav class="fixed top-0 left-0 right-0 z-40 bg-black/70 backdrop-blur-md border-b border-gray-900">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="text-2xl font-black tracking-[0.15em]">
+      <span class="shimmer-text">RIVASILL</span>
+    </div>
+    <div class="hidden md:flex items-center gap-8 text-sm text-gray-400">
+      <a href="#about" class="hover:text-white transition-colors">About</a>
+      <a href="#products" class="hover:text-white transition-colors">Products</a>
+      <a href="#features" class="hover:text-white transition-colors">Why Us</a>
+      <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+      <button onclick="openModal('queryModal')" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all duration-300 hover:scale-105">
+        Send Query
+      </button>
+    </div>
+    <!-- Mobile menu button -->
+    <button class="md:hidden text-gray-400 hover:text-white" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden md:hidden px-6 pb-4 flex flex-col gap-4 text-sm text-gray-400 border-t border-gray-800 pt-4">
+    <a href="#about" class="hover:text-white" onclick="document.getElementById('mobileMenu').classList.add('hidden')">About</a>
+    <a href="#products" class="hover:text-white" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Products</a>
+    <a href="#features" class="hover:text-white" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Why Us</a>
+    <a href="#contact" class="hover:text-white" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Contact</a>
+    <button onclick="openModal('queryModal'); document.getElementById('mobileMenu').classList.add('hidden')" class="px-5 py-2 rounded-xl bg-blue-600 text-white font-semibold w-fit">Send Query</button>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pt-20">
+  <!-- Background blobs -->
+  <div class="blob absolute top-0 left-0 w-[500px] h-[500px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none"></div>
+  <div class="blob absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-900/20 blur-[120px] rounded-full pointer-events-none" style="animation-delay:2s"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-blue-950 via-black to-gray-900 opacity-95 pointer-events-none"></div>
+
+  <div class="relative z-10 text-center max-w-5xl fade-in">
+    <div class="inline-block px-5 py-2 rounded-full border border-blue-500/60 text-blue-300 mb-6 tracking-widest text-xs md:text-sm font-medium">
+      PREMIUM SILICONE SEALANT BRAND
+    </div>
+    <h1 class="text-7xl md:text-9xl font-black tracking-[0.15em] leading-none mb-6">
+      <span class="shimmer-text drop-shadow-[0_0_40px_rgba(59,130,246,0.5)]">RIVASILL</span>
+    </h1>
+    <p class="text-lg md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-10">
+      Engineered for strength, durability, and precision sealing.<br/>
+      Manufactured and marketed by <span class="text-white font-bold">Rivanta Enterprises</span>.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="#products" class="px-8 py-4 rounded-2xl bg-blue-600 hover:bg-blue-500 hover:scale-105 transition-all duration-300 text-base md:text-lg font-semibold shadow-2xl shadow-blue-500/30">
+        Explore Products
+      </a>
+      <button onclick="openModal('contactModal')" class="px-8 py-4 rounded-2xl border border-gray-600 hover:border-white hover:scale-105 transition-all duration-300 text-base md:text-lg font-semibold">
+        Contact Us
+      </button>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-600 text-xs">
+    <span>Scroll</span>
+    <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+<section id="about" class="py-28 px-6 bg-gradient-to-b from-black to-gray-950">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <div>
+      <div class="text-blue-400 text-sm font-semibold tracking-widest mb-4">ABOUT US</div>
+      <h2 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">About Rivanta<br/>Enterprises</h2>
+      <p class="text-gray-300 text-lg leading-relaxed mb-6">
+        Rivanta Enterprises is focused on delivering premium-quality sealing and bonding solutions for modern construction and industrial applications.
+      </p>
+      <p class="text-gray-400 leading-relaxed mb-10">
+        Our flagship brand RIVASILL is developed to provide excellent adhesion, waterproof protection, UV resistance, and long-lasting performance for professionals and everyday users alike.
+      </p>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="p-6 rounded-2xl bg-gray-900 border border-gray-800 hover:border-blue-500 transition-colors duration-300">
+          <div class="text-4xl font-black text-blue-400 mb-1">280<span class="text-2xl">ml</span></div>
+          <div class="text-gray-400 text-sm mt-1">Standard Cartridge</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-gray-900 border border-gray-800 hover:border-blue-500 transition-colors duration-300">
+          <div class="text-4xl font-black text-blue-400 mb-1">100<span class="text-2xl">%</span></div>
+          <div class="text-gray-400 text-sm mt-1">Silicone Formula</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-gray-900 border border-gray-800 hover:border-blue-500 transition-colors duration-300">
+          <div class="text-4xl font-black text-blue-400 mb-1">3</div>
+          <div class="text-gray-400 text-sm mt-1">Premium Variants</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-gray-900 border border-gray-800 hover:border-blue-500 transition-colors duration-300">
+          <div class="text-4xl font-black text-blue-400 mb-1">25+</div>
+          <div class="text-gray-400 text-sm mt-1">Years Durability</div>
+        </div>
+      </div>
+    </div>
+    <div class="relative flex items-center justify-center">
+      <div class="absolute inset-0 blur-3xl bg-blue-500/15 rounded-full pointer-events-none"></div>
+      <div class="relative p-10 rounded-[40px] bg-gradient-to-br from-gray-900 to-black border border-gray-800 shadow-2xl w-full">
+        <div class="w-full h-72 md:h-96 rounded-3xl bg-gradient-to-br from-blue-900/40 to-gray-900 flex flex-col items-center justify-center border border-gray-700">
+          <div class="text-6xl mb-4">🔵</div>
+          <div class="text-2xl font-black tracking-[0.15em] shimmer-text">RIVASILL</div>
+          <div class="text-gray-500 text-sm mt-2">Premium Silicone Sealant</div>
+          <div class="mt-4 text-xs text-gray-600 italic">(Replace with product image)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════ PRODUCTS ═══════════════════════════ -->
+<section id="products" class="py-28 px-6 bg-black">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="text-blue-400 text-sm font-semibold tracking-widest mb-3">OUR PRODUCTS</div>
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">RIVASILL Product Range</h2>
+      <p class="text-gray-400 text-lg max-w-xl mx-auto">
+        Professional silicone sealants designed for modern applications — construction, glass, aluminium, and more.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <!-- Crystal Clear -->
+      <div class="product-card rounded-[30px] overflow-hidden border border-gray-800 bg-gradient-to-b from-gray-950 to-black shadow-2xl">
+        <div class="p-6">
+          <div class="overflow-hidden rounded-2xl mb-6 bg-gray-900 h-72 flex items-center justify-center border border-gray-800">
+            <div class="text-center">
+              <div class="text-5xl mb-3">💎</div>
+              <div class="text-gray-400 text-sm">Clear Sealant Image</div>
+            </div>
+          </div>
+          <div class="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold mb-3 border border-blue-500/20">
+            CRYSTAL CLEAR
+          </div>
+          <h3 class="text-2xl font-bold mb-2">RIVASILL Crystal Clear</h3>
+          <div class="text-blue-400 mb-4 font-medium text-sm">Clear Silicone Sealant · 280ml</div>
+          <p class="text-gray-400 leading-relaxed mb-6 text-sm">
+            Premium transparent silicone sealant with excellent adhesion and waterproof protection. Ideal for glass, mirrors, and transparent surfaces.
+          </p>
+          <div class="space-y-2 text-sm text-gray-300">
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> Waterproof & Weatherproof</div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> UV Resistant</div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> Strong Adhesion</div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> Long Lasting Formula</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pure White -->
+      <div class="product-card rounded-[30px] overflow-hidden border border-blue-800/40 bg-gradient-to-b from-gray-950 to-black shadow-2xl shadow-blue-500/10">
+        <div class="p-6">
+          <div class="overflow-hidden rounded-2xl mb-6 bg-gray-900 h-72 flex items-center justify-center border border-blue-900/30">
+            <div class="text-center">
+              <div class="text-5xl mb-3">⚪</div>
+              <div class="text-gray-400 text-sm">White Sealant Image</div>
+            </div>
+          </div>
+          <div class="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold mb-3 border border-blue-500/20">
+            BESTSELLER
+          </div>
+          <h3 class="text-2xl font-bold mb-2">RIVASILL Pure White</h3>
+          <div class="text-blue-400 mb-4 font-medium text-sm">White Silicone Sealant · 280ml</div>
+          <p class="text-gray-400 leading-relaxed mb-6 text-sm">
+            High-performance white silicone sealant for kitchens, bathrooms, glass and aluminum applications. Clean finish every time.
+          </p>
+          <div class="space-y-2 text-sm text-gray-300">
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> Waterproof & Weatherproof</div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> UV Resistant</div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> Strong Adhesion</div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> Long Lasting Formula</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jet Black -->
+      <div class="product-card rounded-[30px] overflow-hidden border border-gray-800 bg-gradient-to-b from-gray-950 to-black shadow-2xl">
+        <div class="p-6">
+          <div class="overflow-hidden rounded-2xl mb-6 bg-gray-900 h-72 flex items-center justify-center border border-gray-800">
+            <div class="text-center">
+              <div class="text-5xl mb-3">⬛</div>
+              <div class="text-gray-400 text-sm">Black Sealant Image</div>
+            </div>
+          </div>
+          <div class="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold mb-3 border border-blue-500/20">
+            INDUSTRIAL GRADE
+          </div>
+          <h3 class="text-2xl font-bold mb-2">RIVASILL Jet Black</h3>
+          <div class="text-blue-400 mb-4 font-medium text-sm">Black Silicone Sealant · 280ml</div>
+          <p class="text-gray-400 leading-relaxed mb-6 text-sm">
+            Industrial-grade black silicone sealant with superior weather resistance and strong bonding for demanding applications.
+          </p>
+          <div class="space-y-2 text-sm text-gray-300">
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> Waterproof & Weatherproof</div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> UV Resistant</div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> Strong Adhesion</div>
+            <div class="flex items-center gap-2"><span class="text-blue-400">✔</span> Long Lasting Formula</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════ FEATURES ═══════════════════════════ -->
+<section id="features" class="py-28 px-6 bg-gradient-to-b from-gray-950 to-black">
+  <div class="max-w-7xl mx-auto text-center">
+    <div class="text-blue-400 text-sm font-semibold tracking-widest mb-3">WHY CHOOSE US</div>
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">Why Choose RIVASILL</h2>
+    <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-16">Built for professionals, trusted by industry leaders across construction, manufacturing, and interior applications.</p>
+
+    <div class="grid md:grid-cols-4 gap-6 mb-16">
+      <div class="p-8 rounded-3xl bg-gray-900 border border-gray-800 hover:border-blue-500 transition-all duration-300 group">
+        <div class="text-4xl mb-4">🌧️</div>
+        <div class="text-xl font-semibold group-hover:text-blue-400 transition-colors">Weather Resistant</div>
+        <div class="text-gray-500 text-sm mt-2">Performs in all conditions — rain, heat, cold, and humidity</div>
+      </div>
+      <div class="p-8 rounded-3xl bg-gray-900 border border-gray-800 hover:border-blue-500 transition-all duration-300 group">
+        <div class="text-4xl mb-4">💪</div>
+        <div class="text-xl font-semibold group-hover:text-blue-400 transition-colors">Industrial Strength</div>
+        <div class="text-gray-500 text-sm mt-2">Engineered for demanding construction and industrial use</div>
+      </div>
+      <div class="p-8 rounded-3xl bg-gray-900 border border-gray-800 hover:border-blue-500 transition-all duration-300 group">
+        <div class="text-4xl mb-4">💧</div>
+        <div class="text-xl font-semibold group-hover:text-blue-400 transition-colors">Waterproof Formula</div>
+        <div class="text-gray-500 text-sm mt-2">Permanently watertight seal for wet area applications</div>
+      </div>
+      <div class="p-8 rounded-3xl bg-gray-900 border border-gray-800 hover:border-blue-500 transition-all duration-300 group">
+        <div class="text-4xl mb-4">🏆</div>
+        <div class="text-xl font-semibold group-hover:text-blue-400 transition-colors">Professional Finish</div>
+        <div class="text-gray-500 text-sm mt-2">Smooth application with a clean, high-quality end result</div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-blue-950/50 to-black border border-blue-900/30 text-left">
+        <div class="text-blue-400 font-semibold mb-2">🏠 Construction</div>
+        <div class="text-gray-400 text-sm">Window frames, door seals, expansion joints, concrete gaps</div>
+      </div>
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-blue-950/50 to-black border border-blue-900/30 text-left">
+        <div class="text-blue-400 font-semibold mb-2">🪟 Glass & Aluminium</div>
+        <div class="text-gray-400 text-sm">Glazing, shopfronts, mirrors, aluminium cladding, curtain walls</div>
+      </div>
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-blue-950/50 to-black border border-blue-900/30 text-left">
+        <div class="text-blue-400 font-semibold mb-2">🚿 Kitchen & Bath</div>
+        <div class="text-gray-400 text-sm">Basins, bathtubs, shower trays, tiles, sanitary fixtures</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════ CONTACT ═══════════════════════════ -->
+<section id="contact" class="py-28 px-6 bg-black">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">Business Queries & Bulk Orders</h2>
+    <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
+      Dealers, distributors and bulk buyers can send order requirements directly. We will respond within 24 hours.
+    </p>
+    <button onclick="openModal('queryModal')"
+      class="px-12 py-5 rounded-2xl bg-blue-600 hover:bg-blue-500 hover:scale-105 transition-all duration-300 text-xl font-semibold shadow-2xl shadow-blue-500/30">
+      Send Query Now
+    </button>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer class="border-t border-gray-900 py-10 px-6 bg-black">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="text-2xl font-black tracking-[0.15em] shimmer-text">RIVASILL</div>
+    <div class="text-gray-500 text-sm text-center">
+      © 2026 Rivanta Enterprises. All rights reserved.<br/>
+      <span class="text-gray-600">18, Block G Mangol Puri, New Delhi – 110083</span>
+    </div>
+    <div class="flex gap-4 text-sm text-gray-500">
+      <a href="tel:+918447862867" class="hover:text-white transition-colors">+91 8447862867</a>
+      <span>|</span>
+      <a href="mailto:sanjeevkumargautam@gmail.com" class="hover:text-white transition-colors">Email Us</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════ CONTACT MODAL ═══════════════════════════ -->
+<div id="contactModal" class="modal-backdrop" onclick="closeOnBackdrop(event, 'contactModal')">
+  <div class="max-w-2xl w-full rounded-[40px] bg-gradient-to-br from-gray-950 to-black border border-gray-700 p-10 relative shadow-2xl">
+    <button onclick="closeModal('contactModal')" class="absolute top-5 right-6 text-gray-400 hover:text-white text-3xl font-light transition-colors">×</button>
+    <h2 class="text-3xl md:text-4xl font-bold mb-8">Contact Rivanta Enterprises</h2>
+    <div class="space-y-5 text-lg">
+      <div class="p-5 rounded-2xl bg-gray-900 border border-gray-800">
+        <div class="text-gray-400 text-xs mb-1 tracking-widest">OWNER</div>
+        <div class="font-semibold">Sanjeev K Gautam</div>
+      </div>
+      <div class="p-5 rounded-2xl bg-gray-900 border border-gray-800">
+        <div class="text-gray-400 text-xs mb-1 tracking-widest">PHONE</div>
+        <a href="tel:+918447862867" class="font-semibold hover:text-blue-400 transition-colors">+91 8447862867</a>
+      </div>
+      <div class="p-5 rounded-2xl bg-gray-900 border border-gray-800">
+        <div class="text-gray-400 text-xs mb-1 tracking-widest">EMAIL</div>
+        <a href="mailto:sanjeevkumargautam@gmail.com" class="font-semibold break-all hover:text-blue-400 transition-colors">sanjeevkumargautam@gmail.com</a>
+      </div>
+      <div class="p-5 rounded-2xl bg-gray-900 border border-gray-800">
+        <div class="text-gray-400 text-xs mb-1 tracking-widest">ADDRESS</div>
+        <div class="font-semibold leading-relaxed">18, Block G Mangol Puri,<br/>New Delhi – 110083</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════ QUERY MODAL ═══════════════════════════ -->
+<div id="queryModal" class="modal-backdrop" onclick="closeOnBackdrop(event, 'queryModal')">
+  <div class="max-w-3xl w-full rounded-[40px] bg-gradient-to-br from-gray-950 to-black border border-gray-700 p-8 md:p-12 relative shadow-2xl my-4">
+    <button onclick="closeModal('queryModal')" class="absolute top-5 right-6 text-gray-400 hover:text-white text-3xl font-light transition-colors">×</button>
+    <h2 class="text-3xl md:text-4xl font-bold mb-2">Bulk Order Query</h2>
+    <p class="text-gray-400 mb-8">Fill the form and we'll get back to you within 24 hours.</p>
+
+    <form id="queryForm" class="space-y-6">
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+      <input type="hidden" name="subject" value="New Bulk Order Query – RIVASILL Website" />
+      <input type="hidden" name="from_name" value="RIVASILL Website" />
+      <input type="checkbox" name="botcheck" style="display:none" />
+
+      <div>
+        <div class="text-gray-300 text-sm font-semibold mb-3 tracking-wide">PRODUCT QUANTITIES REQUIRED</div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div>
+            <label class="block mb-2 text-gray-400 text-sm">Crystal Clear (units)</label>
+            <input type="number" min="0" max="9999" name="Crystal Clear Qty"
+              class="w-full p-4 rounded-2xl border border-gray-700 text-sm" placeholder="0" />
+          </div>
+          <div>
+            <label class="block mb-2 text-gray-400 text-sm">Pure White (units)</label>
+            <input type="number" min="0" max="9999" name="Pure White Qty"
+              class="w-full p-4 rounded-2xl border border-gray-700 text-sm" placeholder="0" />
+          </div>
+          <div>
+            <label class="block mb-2 text-gray-400 text-sm">Jet Black (units)</label>
+            <input type="number" min="0" max="9999" name="Jet Black Qty"
+              class="w-full p-4 rounded-2xl border border-gray-700 text-sm" placeholder="0" />
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block mb-2 text-gray-400 text-sm">Your Name *</label>
+          <input type="text" name="Name" required class="w-full p-4 rounded-2xl border border-gray-700 text-sm" placeholder="Full name" />
+        </div>
+        <div>
+          <label class="block mb-2 text-gray-400 text-sm">Company Name</label>
+          <input type="text" name="Company" class="w-full p-4 rounded-2xl border border-gray-700 text-sm" placeholder="Your company" />
+        </div>
+        <div>
+          <label class="block mb-2 text-gray-400 text-sm">Email Address *</label>
+          <input type="email" name="Email" required class="w-full p-4 rounded-2xl border border-gray-700 text-sm" placeholder="your@email.com" />
+        </div>
+        <div>
+          <label class="block mb-2 text-gray-400 text-sm">Phone Number *</label>
+          <input type="tel" name="Phone" required class="w-full p-4 rounded-2xl border border-gray-700 text-sm" placeholder="+91 XXXXX XXXXX" />
+        </div>
+        <div>
+          <label class="block mb-2 text-gray-400 text-sm">City / State</label>
+          <input type="text" name="City" class="w-full p-4 rounded-2xl border border-gray-700 text-sm" placeholder="Your city" />
+        </div>
+        <div>
+          <label class="block mb-2 text-gray-400 text-sm">Query Type</label>
+          <select name="Query Type"
+            class="w-full p-4 rounded-2xl border border-gray-700 text-sm bg-gray-900 text-gray-300 focus:outline-none focus:border-blue-500">
+            <option value="Bulk Order">Bulk Order</option>
+            <option value="Dealership">Dealership / Distribution</option>
+            <option value="Product Info">Product Information</option>
+            <option value="Pricing">Pricing Inquiry</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="block mb-2 text-gray-400 text-sm">Your Requirements</label>
+        <textarea name="Requirement" rows="4"
+          class="w-full p-4 rounded-2xl border border-gray-700 text-sm resize-none"
+          placeholder="Describe your requirements, delivery location, quantities..."></textarea>
+      </div>
+
+      <button type="submit" id="submitBtn"
+        class="w-full py-5 rounded-2xl bg-blue-600 hover:bg-blue-500 hover:scale-[1.01] transition-all duration-300 text-lg font-semibold shadow-2xl shadow-blue-500/30 flex items-center justify-center gap-3">
+        <span id="submitText">Submit Query</span>
+        <svg id="submitSpinner" class="hidden w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+        </svg>
+      </button>
+      <p class="text-center text-gray-600 text-xs">Your query will be emailed directly to Rivanta Enterprises.</p>
+    </form>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+
+<!-- ═══════════════════════════ SCRIPT ═══════════════════════════ -->
+<script>
+  function openModal(id)  { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+  function closeOnBackdrop(e, id) { if (e.target === document.getElementById(id)) closeModal(id); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal('contactModal'); closeModal('queryModal'); } });
+
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast ${type} show`;
+    setTimeout(() => t.classList.remove('show'), 5000);
+  }
+
+  document.getElementById('queryForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const key = this.querySelector('[name="access_key"]').value;
+    if (!key || key === 'YOUR_ACCESS_KEY_HERE') {
+      showToast('⚠️ Please set your Web3Forms access key (see README).', 'error'); return;
+    }
+    const btn = document.getElementById('submitBtn');
+    const txt = document.getElementById('submitText');
+    const spn = document.getElementById('submitSpinner');
+    btn.disabled = true; txt.textContent = 'Sending...'; spn.classList.remove('hidden');
+    try {
+      const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
+      const data = await res.json();
+      if (data.success) {
+        showToast('✅ Query sent! We will contact you within 24 hours.', 'success');
+        this.reset(); setTimeout(() => closeModal('queryModal'), 1500);
+      } else {
+        showToast('❌ Failed to send. Please call us directly.', 'error');
+      }
+    } catch {
+      showToast('❌ Network error. Please call +91 8447862867', 'error');
+    } finally {
+      btn.disabled = false; txt.textContent = 'Submit Query'; spn.classList.add('hidden');
+    }
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('section').forEach(el => {
+    if (!el.querySelector('.fade-in')) {
+      el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      observer.observe(el);
+    }
+  });
+</script>
+
+</body>
+</html>
